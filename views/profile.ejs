@@ -1,0 +1,85 @@
+<%- include('partials/header') -%>
+<div class="container">
+  <div class="row mt-5">
+      <div class="col-6">
+
+
+
+   <nav class="relative container mx-auto p-6">
+    <div class="flex items-center justify-between">
+       <div class="w-12">
+      
+        <img src="/imgs/logo.svg" alt="">
+      </div>
+      <div class="flex items-center justify-between">
+              <p class="text-red-500 m-2"><strong>User Name</strong>: <%= user.userName %></p>
+              <p class="text-red-500 m-2"><strong>Email</strong>: <%= user.email %></p>
+             
+          </div>
+      <div class="hidden md:flex space-x-6 font-bold">
+        <a href="/logout" class="text-main hover:text-black">LOGOUT</a>
+        
+        <a href="/feed" class="text-main hover:text-black">GO TO FEED</a>
+        </div>
+    </div>
+   </nav>
+
+
+          <div class="px-5 my-32 max-w-3xl mx-auto space-y-6">
+            <h2 class="text-2xl text-gray-700 py-6">New Recipe</h2>
+
+            <div class="mx-20 py-6">
+
+
+              <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+                <div class="text-gray-600 mb-3">
+                  <label for="title" class="form-label">Recipe Title</label>
+                  <input type="text" class="form-control w-full mt-2 mb-6 px-4 border rounded text-gray-700 focus:outline-none focus:border-red-500" id="title" name="title">
+                </div>
+                <div class="text-gray-600 mb-3">
+                <label for="ingredients" class="form-label">Ingredients</label>
+                <textarea class="form-control h-60 w-full mt-2 mb-6 px-4 border rounded text-gray-700 focus:outline-none focus:border-red-500" id="ingredients" name="ingredients"></textarea>
+              </div>
+                <div class="text-gray-600 mb-3">
+                <label for="caption" class="form-label">Directions</label>
+                <textarea class="form-control h-60 w-full mt-2 mb-6 px-4 border rounded text-gray-700 focus:outline-none focus:border-red-500" id="caption" name="caption"></textarea>
+              </div>
+              <div class="text-gray-600 mb-6">
+                <label for="type" class="form-label">Type of dish</label>
+               <select name="dishtype" id="type" class="mt-2 mb-6 px-4 border rounded text-gray-700 focus:outline-none focus:border-red-500">
+                 <option value="">Pick one</option>
+                 <option value="Entrée">Entrée</option>
+                 <option value="Side Dish">Side Dish</option>
+                 <option value="Appetizer">Appetizer</option>
+                 <option value="Dessert">Dessert</option>
+                 <option value="Salad">Salad</option>
+                 
+                 
+                </select>
+              </div>
+              <div class="text-gray-600 mb-3">
+                <label for="imgUpload" class="form-label">Image</label>
+                <input type="file" class="form-control" id="imageUpload" name="file">
+              </div>
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+            </form>
+          </div>
+          </div>
+      </div>
+      <div class="container flex flex-col mx-auto my-auto ">
+        <ul class="grid grid-cols-2 gap-4">
+        <% for(var i=0; i<posts.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <a href="/post/<%= posts[i]._id%>">
+               <span class="font-bold"><%= posts[i].title%></span>
+              <img class="img-fluid" src="<%= posts[i].image%>">
+            </a>
+          </li>
+        <% } %>
+        </ul>
+        
+      </div>  
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') -%>
